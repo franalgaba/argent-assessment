@@ -52,7 +52,7 @@ Having a constructor in the contract where `owner = msg.sender()` and require th
 
 Following the Aave [documentation of Health Risk](https://docs.aave.com/risk/asset-risk/risk-parameters#health-factor) definition:
 
-`((100 + (100,000 / 2,000)) * ((0.8) / 3)) / (150,000 / 2,000) = 1.6`
+`((100 + (100,000 / 2,000)) * 0.8 / (150,000 / 2,000) = 1.6`
 
 ### Point b
 
@@ -60,18 +60,25 @@ When ETH price is < 880$ the Health Factor would be below 1 which is not recomme
 
 HF below 1:
 
-`((100 + (100,000 / 880)) * ((0.8) / 3)) / (150,000 / 880) = 1`
+`((100 + (100,000 / 880)) * 0.8 / (150,000 / 880) = 1`
 
 Liquidation HF:
 
-`((100 + (100,000 / 500)) * ((0.8) / 3)) / (150,000 / 500) = 0.8`
+`((100 + (100,000 / 500)) * 0.8 / (150,000 / 500) = 0.8`
 
 ### Point c
 
 For keeping the HF above 1.2 the borrowed USDC must be below 200k USDC. So, 50k more USDC could be borrowed while keeping HF above 1.2.
 
-`((100 + (100,000 / 500)) * ((0.8) / 3)) / (150,000 / 500) = 0.8`
+`((100 + (100,000 / 500)) * 0.8 / (150,000 / 500) = 0.8`
 
 ### Point d
 
 If ~280,000 USDC are borrowed the HF would be 0.85 and the position would be liquidated
+
+### Point e
+
+Coded solution in `assessment_c/point_e.py`
+
+* Number of years to be in risk of liquidation: 6 with HF: 0.93
+* Number of years to be liquidated: 8 with HF: 0.78
