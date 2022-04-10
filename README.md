@@ -46,3 +46,32 @@ The random number would be generated from: `rand = n1 XOR n2 XOR n3 .. XOR nn` w
 
 Having a constructor in the contract where `owner = msg.sender()` and require that `msg.sender() == owner` when calling the `draw` method.
             
+## Assessment 3: DeFi problem
+
+### Point a
+
+Following the Aave [documentation of Health Risk](https://docs.aave.com/risk/asset-risk/risk-parameters#health-factor) definition:
+
+`((100 + (100,000 / 2,000)) * ((0.8) / 3)) / (150,000 / 2,000) = 1.6`
+
+### Point b
+
+When ETH price is < 880$ the Health Factor would be below 1 which is not recommended. When ETH price < 500$ the position would be liquidated.
+
+HF below 1:
+
+`((100 + (100,000 / 880)) * ((0.8) / 3)) / (150,000 / 880) = 1`
+
+Liquidation HF:
+
+`((100 + (100,000 / 500)) * ((0.8) / 3)) / (150,000 / 500) = 0.8`
+
+### Point c
+
+For keeping the HF above 1.2 the borrowed USDC must be below 200k USDC. So, 50k more USDC could be borrowed while keeping HF above 1.2.
+
+`((100 + (100,000 / 500)) * ((0.8) / 3)) / (150,000 / 500) = 0.8`
+
+### Point d
+
+If ~280,000 USDC are borrowed the HF would be 0.85 and the position would be liquidated
